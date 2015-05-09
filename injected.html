@@ -5,13 +5,13 @@
     <title></title>
     <script>
 
-        function compare(a, b) {
+        function singleDiff(a, b) {
+            var longer, shorter, i = 0, delta = 0, diff = 0;
 
             // todo:  check test cases here
-            if (Math.abs(a.length - b.length) > 1) return false;
+            if (Math.abs(a.length - b.length) > 1 || (a === b)) return false;
 
             // start with longer and shorter strings
-            var longer, shorter, i = 0, delta = 0;
             if (a.length < b.length) {
                 longer = b;
                 shorter = a;
@@ -22,23 +22,44 @@
 
             for (i = 0; i < shorter.length; i++) {
                 if (shorter[i] !== longer[i + delta]) {
-                    delta++;
-                    if (delta > 1) {
+                    diff++;
+                    if (diff > 1) {
                         return false;
                     }
-                    if (shorter[i] !== longer[i + delta]) {
-                        return false;
+                    if (shorter[i] === longer[i + 1]) {
+                        delta++
+                    } else {
+                        if (shorter[i+1] !== longer[i+1]) {
+                            return false;
+                        }
                     }
+
                 }
             }
+
+            // console.log(longer, shorter, diff, delta, 'true');
             return true;
 
         }
 
-        console.log(compare('toy', 'toys'));
-        console.log(compare('stoy', 'toy'));
-        console.log(compare('toy', 'stoys'));
-        console.log(compare('toy', 'stoys'));
+        console.log(singleDiff("toy", "dog") === false);
+        console.log(singleDiff("toy", "toys") === true);
+        console.log(singleDiff("toy", "soy") === true);
+        console.log(singleDiff("cat", "cart") === true);
+        console.log(singleDiff("met", "me") === true);
+        console.log(singleDiff("time", "emit") === false);
+        console.log(singleDiff("short", "longlonglong") === false);
+        console.log(singleDiff("longlonglong", "short") === false);
+        console.log(singleDiff("abcd", "xbcde") === false);
+        console.log(singleDiff("abcd", "axbcd") === true);
+        console.log(singleDiff("a", "b") === true);
+        console.log(singleDiff("abc", "abc") === false);
+        console.log(singleDiff("tom", "tim") === true);
+        console.log(singleDiff("cat", "car") === true);
+        console.log(singleDiff("abcd", "axbxcd") === false);
+        console.log(singleDiff("casts", "cats") === true);
+        console.log(singleDiff("adog", "dog") === true);
+        console.log(singleDiff("cast", "cat") === true);
 
     </script>
 </head>
