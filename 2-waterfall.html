@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="async.js"></script>
+    <script>
+
+        // async waterfall
+        function randomPrint(i, total, callback) {
+            var random_interval = ~~(Math.random() * 1000);
+            setTimeout(function () {
+                console.log('Running total: ', total + random_interval);
+                console.log(i, random_interval);
+                callback(null, {
+                    i: i,
+                    interval: random_interval
+                });
+            }, random_interval)
+        }
+        var arr_of_functions = [];
+
+        for (var i = 0; i < 10; i++) {
+            arr_of_functions.push(randomPrint.bind(null, i));
+        }
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

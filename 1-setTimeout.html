@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="async.js"></script>
+    <script>
+
+        function randomPrint(i, callback) {
+            var random_interval = ~~(Math.random() * 1000);
+            setTimeout(function () {
+                console.log(i, random_interval);
+                callback(null, {
+                    i: i,
+                    interval: random_interval
+                });
+            }, random_interval)
+        }
+        var arr_of_functions = [];
+
+        for (var i = 0; i < 10; i++) {
+            arr_of_functions.push(randomPrint.bind(null, i));
+        }
+
+        /*async.parallel(arr_of_functions, function(err, results){
+            console.log(results.reduce(function (total, obj) {
+                return obj.interval + total;
+            }, 0));
+        });*/
+
+        /*async.series(arr_of_functions, function(err, results){
+            console.log(results.reduce(function (total, obj) {
+                return obj.interval + total;
+            }, 0));
+        });*/
+
+
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

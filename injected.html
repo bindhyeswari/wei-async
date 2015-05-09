@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script>
+
+        function compare(a, b) {
+
+            // todo:  check test cases here
+            if (Math.abs(a.length - b.length) > 1) return false;
+
+            // start with longer and shorter strings
+            var longer, shorter, i = 0, delta = 0;
+            if (a.length < b.length) {
+                longer = b;
+                shorter = a;
+            } else {
+                shorter = b;
+                longer = a;
+            }
+
+            for (i = 0; i < shorter.length; i++) {
+                if (shorter[i] !== longer[i + delta]) {
+                    delta++;
+                    if (delta > 1) {
+                        return false;
+                    }
+                    if (shorter[i] !== longer[i + delta]) {
+                        return false;
+                    }
+                }
+            }
+            return true;
+
+        }
+
+        console.log(compare('toy', 'toys'));
+        console.log(compare('stoy', 'toy'));
+        console.log(compare('toy', 'stoys'));
+        console.log(compare('toy', 'stoys'));
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>
