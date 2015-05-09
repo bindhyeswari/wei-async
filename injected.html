@@ -8,6 +8,7 @@
         function singleDiff(a, b) {
             var longer, shorter, i = 0, delta = 0, diff = 0;
 
+
             // todo:  check test cases here
             if (Math.abs(a.length - b.length) > 1 || (a === b)) return false;
 
@@ -20,8 +21,10 @@
                 longer = a;
             }
 
-            for (i = 0; i < shorter.length; i++) {
-                if (shorter[i] !== longer[i + delta]) {
+            //console.log(shorter, longer);
+
+            for (i = 0; i < longer.length; i++) {
+                if (shorter[i - delta] !== longer[i]) {
                     diff++;
                     if (diff > 1) {
                         return false;
@@ -29,7 +32,7 @@
                     if (shorter[i] === longer[i + 1]) {
                         delta++
                     } else {
-                        if (shorter[i+1] !== longer[i+1]) {
+                        if (shorter[i + 1] !== longer[i + 1]) {
                             return false;
                         }
                     }
@@ -37,7 +40,7 @@
                 }
             }
 
-            // console.log(longer, shorter, diff, delta, 'true');
+
             return true;
 
         }
